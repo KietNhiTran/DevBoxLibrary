@@ -1,0 +1,13 @@
+$schema: "1.0"
+name: "azure-migrate-cod-assessment"
+image: microsoftwindowsdesktop_windows-ent-cpc_win11-24H2-ent-cpc
+description: "This definition is for azure migration code assessment specialist"
+
+tasks:
+  - name: powershell
+    parameters:
+      command: |
+        $env:Path = [System.Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path','User') 
+        code --install-extension github.copilot
+        code --install-extension github.copilot-chat   
+        code --install-extension devcenter.ms-devbox
