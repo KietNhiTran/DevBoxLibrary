@@ -1,0 +1,19 @@
+$schema: "1.0"
+name: "azure-devbox-team-customization"
+image: microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2
+description: "This definition is for project lead / tech lead to developp customized devbox definition for their team"
+
+### base image has: Visual Studio, Azure CLI, Azure Developer CLI, Visual Studio Code ###
+tasks:
+  - name: winget
+    parameters:
+      package: Git.git
+
+userTasks:
+  - name: powershell
+    parameters:
+      command: |
+        code --install-extension github.copilot
+        code --install-extension github.copilot-chat   
+        code --install-extension devcenter.ms-devbox
+        code --install-extension ms-azuretools.vscode-azure-github-copilot
