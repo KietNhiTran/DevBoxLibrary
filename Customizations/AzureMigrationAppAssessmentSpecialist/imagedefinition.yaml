@@ -3,7 +3,7 @@ name: "azure-migrate-cod-assessment"
 image: microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2
 description: "This definition is for azure migration code assessment specialist"
 
-### base image has: Visual Studio, Azure CLI, Azure Developer CLI, Visual Studio Code ###
+### base image has: Visual Studio, Azure CLI, Azure Developer CLI, Visual Studio Code, Visula Studio Github copilot and chat extensions ###
 
 tasks:
   - name: winget
@@ -34,15 +34,24 @@ tasks:
         if($currentPath -notlike '*'+$appcatDirBin+'*') {
           [System.Environment]::SetEnvironmentVariable('Path', $currentPath + ';' + $appcatDirBin, 'Machine')
         }
+  - name: powershell
+    description: "Install appcat for .NET"
+    parameters:
+      command: |
+        dotnet tool install -g dotnet-appcat  
+
 userTasks:
   - name: powershell
     parameters:
       command: |
         code --install-extension github.copilot
         code --install-extension github.copilot-chat   
-        code --install-extension devcenter.ms-devbox
-        code --install-extension ms-vscode.vscode-node-azure-pack
-        code --install-extension ms-azuretools.vscode-azurelogicapps
-        code --install-extension ms-azuretools.vscode-azure-github-copilot
         code --install-extension ms-vscode.azurecli
         code --install-extension ms-azuretools.azure-dev
+  - name: powershell
+    parameters:
+      command: |
+        azuredatastudio --install-extension microsoft.sql-migration
+  - name: install-vs-extension
+    parameters:
+      marketplaceItemName: ms-dotnettools.appcat

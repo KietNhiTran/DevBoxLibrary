@@ -1,0 +1,32 @@
+$schema: "1.0"
+name: "azure-integration-engineer"
+image: microsoftvisualstudio_visualstudioplustools_vs-2022-ent-general-win11-m365-gen2
+description: "This definition is for integration engineer whose daily work is design, implement and deploy an integration solution between different systems."
+
+### base image has: Visual Studio, Azure CLI, Azure Developer CLI, Visual Studio Code ###
+
+tasks:
+  - name: winget
+    parameters:
+      package: Microsoft.OpenJDK.17
+  - name: winget
+    parameters:
+      package: Microsoft.AzureDataStudio
+userTasks:
+  - name: powershell
+    parameters:
+      command: |
+        code --install-extension github.copilot
+        code --install-extension github.copilot-chat   
+        code --install-extension devcenter.ms-devbox
+        code --install-extension ms-vscode.vscode-node-azure-pack
+        code --install-extension azurite.azurite
+        code --install-extension ms-azuretools.vscode-azurelogicapps
+        code --install-extension ms-azuretools.vscode-logicapps
+        code --install-extension ms-azuretools.vscode-azure-github-copilot
+        code --install-extension ms-vscode.azurecli
+        code --install-extension ms-azuretools.azure-dev
+  - name: powershell
+    parameters:
+      command: |
+        azuredatastudio --install-extension microsoft.sql-migration
